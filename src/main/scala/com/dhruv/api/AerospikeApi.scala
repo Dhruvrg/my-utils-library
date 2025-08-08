@@ -14,19 +14,19 @@ import com.aerospike.client._
 import com.aerospike.client.query.Statement
 import com.dhruv.AerospikeClientManager
 
-// === Data Models ===
+// Data Models
 final case class SetInfo(name: String)
 final case class NamespaceInfo(name: String, sets: Seq[SetInfo])
 final case class RecordInfo(key: String, bins: Map[String, String])
 
-// === JSON Formats ===
+// JSON Formats
 trait JsonSupport extends DefaultJsonProtocol {
   implicit val setInfoFormat = jsonFormat1(SetInfo)
   implicit val nsInfoFormat = jsonFormat2(NamespaceInfo)
   implicit val recordInfoFormat = jsonFormat2(RecordInfo)
 }
 
-// === Aerospike API Server ===
+// Aerospike API Server
 object AerospikeApi extends JsonSupport {
 
   def startServer(host: String = "0.0.0.0", port: Int = 8080): Unit = {
